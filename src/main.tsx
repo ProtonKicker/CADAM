@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 import App from './App.tsx';
 import { PostHogProvider } from 'posthog-js/react';
+import './i18n';
 import './index.css';
 import React from 'react';
 import { ErrorView } from './views/ErrorView.tsx';
@@ -27,6 +28,7 @@ import EmailConfirmation from './views/EmailConfirmation.tsx';
 import { PromptView } from './views/PromptView.tsx';
 import { SubscriptionView } from './views/SubscriptionView.tsx';
 import { HistoryView } from './views/HistoryView.tsx';
+import ComponentShowcase from './views/ComponentShowcase.tsx';
 import { AuthGuard } from './components/auth/AuthGuard.tsx';
 import { Layout } from './components/Layout.tsx';
 import ShareView from './views/ShareView.tsx';
@@ -76,6 +78,7 @@ const router = sentryCreateBrowserRouter(
         { path: '/privacy-policy', element: <PrivacyPolicyView /> },
         { path: '/terms-of-service', element: <TermsOfServiceView /> },
         { path: '/update-password', element: <UpdatePasswordView /> },
+        { path: '/showcase', element: <ComponentShowcase /> },
         {
           element: <Layout />,
           children: [

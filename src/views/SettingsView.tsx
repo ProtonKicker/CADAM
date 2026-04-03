@@ -22,8 +22,11 @@ import { useProfile, useUpdateProfile } from '@/services/profileService';
 import { AvatarUpdateDialog } from '@/components/auth/AvatarUpdateDialog';
 import { useTokenPacks } from '@/hooks/useTokenPacks';
 import { useTokenCosts } from '@/hooks/useTokenCosts';
+import { LanguageSelector } from '@/components/ui/LanguageSelector';
+import { useTranslation } from 'react-i18next';
 
 export default function SettingsView() {
+  const { t } = useTranslation();
   const {
     subscription,
     subscriptionTokens,
@@ -140,7 +143,10 @@ export default function SettingsView() {
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto bg-adam-background-1 p-8">
       <div className="mx-auto flex max-w-4xl flex-col gap-12">
-        <h1 className="text-2xl font-medium text-adam-neutral-50">Settings</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-medium text-adam-neutral-50">{t('settings.title')}</h1>
+          <LanguageSelector />
+        </div>
 
         <div className="flex flex-col gap-24">
           <div className="grid grid-cols-3 items-center gap-4 sm:grid-cols-4">

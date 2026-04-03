@@ -33,6 +33,7 @@ import { cn } from '@/lib/utils';
 import { Conversation, ConversationSettings } from '@shared/types';
 import { UserAvatar } from '@/components/chat/UserAvatar';
 import { useProfile } from '@/services/profileService';
+import { useTranslation } from 'react-i18next';
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -44,6 +45,7 @@ function DesktopSidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
   const { user, signOut } = useAuth();
   const isMobile = useIsMobile();
   const { data: profile } = useProfile();
+  const { t } = useTranslation();
 
   // Get 10 most recent conversations
   const { data: recentConversations } = useQuery<Conversation[]>({
@@ -75,7 +77,7 @@ function DesktopSidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
 
   const sidebarNavigate = (path: string) => {
     if (isMobile) {
-      setIsSidebarOpen(false); // setIsSidebarOpen is actually setOpen from Sheet component
+      setIsSidebarOpen(false);
     }
     navigate(path);
   };
@@ -118,8 +120,10 @@ function DesktopSidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
             <Tooltip>
               <TooltipTrigger asChild>{children}</TooltipTrigger>
               <TooltipContent side="right" className="flex flex-col">
-                <span className="font-semibold">Home</span>
-                <span className="text-xs text-muted-foreground">Home Page</span>
+                <span className="font-semibold">{t('navigation.home')}</span>
+                <span className="text-xs text-muted-foreground">
+                  {t('placeholders.startBuilding')}
+                </span>
               </TooltipContent>
             </Tooltip>
           )}
@@ -159,9 +163,11 @@ function DesktopSidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
               <Tooltip>
                 <TooltipTrigger asChild>{children}</TooltipTrigger>
                 <TooltipContent side="right" className="flex flex-col">
-                  <span className="font-semibold">New Creation</span>
+                  <span className="font-semibold">
+                    {t('navigation.newCreation')}
+                  </span>
                   <span className="text-xs text-muted-foreground">
-                    Start a new conversation
+                    {t('history.noConversationsDescription')}
                   </span>
                 </TooltipContent>
               </Tooltip>
@@ -182,7 +188,7 @@ function DesktopSidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
                 />
                 {isSidebarOpen && (
                   <div className="text-sm font-semibold leading-[14px] tracking-[-0.14px] text-adam-neutral-200">
-                    New Creation
+                    {t('navigation.newCreation')}
                   </div>
                 )}
               </Button>
@@ -192,9 +198,9 @@ function DesktopSidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
             {[
               {
                 icon: LayoutGrid,
-                label: 'Creations',
+                label: t('navigation.creations'),
                 href: '/history',
-                description: 'View past creations',
+                description: t('history.listView'),
                 submenu: recentConversations,
               },
             ].map(({ icon: Icon, label, href, description, submenu }) => (
@@ -379,20 +385,22 @@ function DesktopSidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
                   <DropdownMenuItem asChild>
                     <Link to="/settings" className="flex items-center">
                       <Settings className="mr-2 h-4 w-4" />
-                      <span>Settings</span>
+                      <span>{t('navigation.settings')}</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => sidebarNavigate('/subscription')}
                   >
                     <Crown className="mr-2 h-4 w-4" />
-                    <span>Subscriptions</span>
+                    <span>{t('navigation.subscriptions')}</span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut className="mr-2 h-4 w-4 text-adam-text-primary" />
-                  <span className="text-adam-text-primary">Sign out</span>
+                  <span className="text-adam-text-primary">
+                    {t('navigation.signOut')}
+                  </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -410,6 +418,7 @@ function MobileSidebar({
   setIsSidebarOpen,
 }: SidebarProps) {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -429,9 +438,7 @@ function MobileSidebar({
         {/* For aria stuff */}
         <SheetHeader className="hidden">
           <SheetTitle className="text-adam-text-primary">AdamCAD</SheetTitle>
-          <SheetDescription>
-            AI-powered CAD software for everyone
-          </SheetDescription>
+          <SheetDescription>{t('app.tagline')}</SheetDescription>
         </SheetHeader>
         <DesktopSidebar isSidebarOpen={true} setIsSidebarOpen={setOpen} />
       </SheetContent>
