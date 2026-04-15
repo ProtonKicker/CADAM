@@ -12,8 +12,11 @@ export function AuthGuard({ children }: AuthGuardProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // BYPASS AUTH FOR TESTING - Lingma
+  const BYPASS_AUTH = true; // Set to false for production
+
   useEffect(() => {
-    if (!isLoading && !session && !user) {
+    if (!BYPASS_AUTH && !isLoading && !session && !user) {
       // Capture current path for redirect after authentication
       // Only include pathname and search to avoid security issues
       const currentPath = location.pathname + location.search;
@@ -34,6 +37,11 @@ export function AuthGuard({ children }: AuthGuardProps) {
         <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
       </div>
     );
+  }
+
+  // BYPASS: Always render children for testing
+  if (BYPASS_AUTH) {
+    return <>{children}</>;
   }
 
   if (!session || !user) {

@@ -96,10 +96,10 @@ export default function ComponentShowcase() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-adam-neutral-700 pb-6">
           <div>
-            <h1 className="text-4xl font-bold text-adam-neutral-50 mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2">
               🎨 CADAM Component Showcase
             </h1>
-            <p className="text-adam-neutral-300">
+            <p className="text-gray-300">
               Interactive demo of all translated UI components
             </p>
           </div>
@@ -108,14 +108,14 @@ export default function ComponentShowcase() {
 
         {/* Navigation Components */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Menu className="w-6 h-6" />
             Navigation & Actions
           </h2>
           <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
             <CardHeader>
-              <CardTitle className="text-adam-neutral-50">Buttons</CardTitle>
-              <CardDescription className="text-adam-neutral-400">
+              <CardTitle className="text-white">Buttons</CardTitle>
+              <CardDescription className="text-gray-400">
                 Various button styles and states
               </CardDescription>
             </CardHeader>
@@ -145,7 +145,7 @@ export default function ComponentShowcase() {
 
         {/* Authentication Components */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Lock className="w-6 h-6" />
             Authentication Forms
           </h2>
@@ -153,43 +153,43 @@ export default function ComponentShowcase() {
             {/* Sign In Form */}
             <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
               <CardHeader>
-                <CardTitle className="text-adam-neutral-50">
+                <CardTitle className="text-white">
                   {t('auth.signIn')}
                 </CardTitle>
-                <CardDescription className="text-adam-neutral-400">
+                <CardDescription className="text-gray-400">
                   {t('auth.enterEmail')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-adam-neutral-300">
+                  <Label htmlFor="email" className="text-gray-300">
                     {t('auth.email')}
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 w-4 h-4 text-adam-neutral-500" />
+                    <Mail className="absolute left-3 top-3 w-4 h-4 text-white0" />
                     <Input
                       id="email"
                       placeholder={t('placeholders.enterEmail')}
-                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-adam-neutral-50"
+                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-white"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-adam-neutral-300">
+                  <Label htmlFor="password" className="text-gray-300">
                     {t('auth.password')}
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 w-4 h-4 text-adam-neutral-500" />
+                    <Lock className="absolute left-3 top-3 w-4 h-4 text-white0" />
                     <Input
                       id="password"
                       type="password"
                       placeholder={t('placeholders.enterPassword')}
-                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-adam-neutral-50"
+                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-white"
                     />
                   </div>
                 </div>
                 <Button className="w-full">{t('auth.signIn')}</Button>
-                <p className="text-xs text-center text-adam-neutral-400">
+                <p className="text-xs text-center text-gray-400">
                   {t('auth.forgotPassword')}
                 </p>
               </CardContent>
@@ -198,51 +198,51 @@ export default function ComponentShowcase() {
             {/* Sign Up Form */}
             <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
               <CardHeader>
-                <CardTitle className="text-adam-neutral-50">
+                <CardTitle className="text-white">
                   {t('auth.signUp')}
                 </CardTitle>
-                <CardDescription className="text-adam-neutral-400">
+                <CardDescription className="text-gray-400">
                   {t('auth.dontHaveAccount')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="fullname" className="text-adam-neutral-300">
+                  <Label htmlFor="fullname" className="text-gray-300">
                     {t('auth.fullName')}
                   </Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-3 w-4 h-4 text-adam-neutral-500" />
+                    <User className="absolute left-3 top-3 w-4 h-4 text-white0" />
                     <Input
                       id="fullname"
                       placeholder={t('placeholders.enterFullName')}
-                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-adam-neutral-50"
+                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-white"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-adam-neutral-300">
+                  <Label htmlFor="signup-email" className="text-gray-300">
                     {t('auth.email')}
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 w-4 h-4 text-adam-neutral-500" />
+                    <Mail className="absolute left-3 top-3 w-4 h-4 text-white0" />
                     <Input
                       id="signup-email"
                       placeholder={t('placeholders.enterEmail')}
-                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-adam-neutral-50"
+                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-white"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password" className="text-adam-neutral-300">
+                  <Label htmlFor="signup-password" className="text-gray-300">
                     {t('auth.password')}
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 w-4 h-4 text-adam-neutral-500" />
+                    <Lock className="absolute left-3 top-3 w-4 h-4 text-white0" />
                     <Input
                       id="signup-password"
                       type="password"
                       placeholder={t('placeholders.confirmPassword')}
-                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-adam-neutral-50"
+                      className="pl-10 bg-adam-bg-dark border-adam-neutral-700 text-white"
                     />
                   </div>
                 </div>
@@ -254,26 +254,26 @@ export default function ComponentShowcase() {
 
         {/* Settings Components */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Settings className="w-6 h-6" />
             Settings & Controls
           </h2>
           <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
             <CardHeader>
-              <CardTitle className="text-adam-neutral-50">
+              <CardTitle className="text-white">
                 {t('settings.notifications')}
               </CardTitle>
-              <CardDescription className="text-adam-neutral-400">
+              <CardDescription className="text-gray-400">
                 {t('settings.notificationsDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label className="text-adam-neutral-300">
+                  <Label className="text-gray-300">
                     {t('settings.responses')}
                   </Label>
-                  <p className="text-sm text-adam-neutral-400">
+                  <p className="text-sm text-gray-400">
                     {t('settings.notificationsDescription')}
                   </p>
                 </div>
@@ -284,7 +284,7 @@ export default function ComponentShowcase() {
               </div>
               
               <div className="space-y-2">
-                <Label className="text-adam-neutral-300">
+                <Label className="text-gray-300">
                   {t('viewer.brightness')}
                 </Label>
                 <Slider
@@ -294,7 +294,7 @@ export default function ComponentShowcase() {
                   step={1}
                   className="w-full"
                 />
-                <div className="flex justify-between text-xs text-adam-neutral-400">
+                <div className="flex justify-between text-xs text-gray-400">
                   <span>0%</span>
                   <span>{sliderValue[0]}%</span>
                   <span>100%</span>
@@ -302,11 +302,11 @@ export default function ComponentShowcase() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-adam-neutral-300">
+                <Label className="text-gray-300">
                   {t('viewer.lighting')}
                 </Label>
                 <Select value={selectedValue} onValueChange={setSelectedValue}>
-                  <SelectTrigger className="bg-adam-bg-dark border-adam-neutral-700 text-adam-neutral-50">
+                  <SelectTrigger className="bg-adam-bg-dark border-adam-neutral-700 text-white">
                     <SelectValue placeholder="Select lighting preset" />
                   </SelectTrigger>
                   <SelectContent className="bg-adam-bg-secondary-dark border-adam-neutral-700">
@@ -323,7 +323,7 @@ export default function ComponentShowcase() {
 
         {/* Status & Feedback */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Info className="w-6 h-6" />
             Status & Feedback
           </h2>
@@ -331,27 +331,27 @@ export default function ComponentShowcase() {
             {/* Progress */}
             <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
               <CardHeader>
-                <CardTitle className="text-adam-neutral-50">
+                <CardTitle className="text-white">
                   {t('subscriptions.feature1')}
                 </CardTitle>
-                <CardDescription className="text-adam-neutral-400">
+                <CardDescription className="text-gray-400">
                   Token usage progress
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-adam-neutral-300">
+                    <span className="text-gray-300">
                       {t('settings.subscriptionTokens')}
                     </span>
-                    <span className="text-adam-neutral-400">750 / 1000</span>
+                    <span className="text-gray-400">750 / 1000</span>
                   </div>
                   <Progress value={75} className="h-2" />
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-adam-neutral-300">Generating...</span>
-                    <span className="text-adam-neutral-400">45%</span>
+                    <span className="text-gray-300">Generating...</span>
+                    <span className="text-gray-400">45%</span>
                   </div>
                   <Progress value={45} className="h-2" />
                 </div>
@@ -361,8 +361,8 @@ export default function ComponentShowcase() {
             {/* Badges */}
             <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
               <CardHeader>
-                <CardTitle className="text-adam-neutral-50">Badges</CardTitle>
-                <CardDescription className="text-adam-neutral-400">
+                <CardTitle className="text-white">Badges</CardTitle>
+                <CardDescription className="text-gray-400">
                   Status indicators
                 </CardDescription>
               </CardHeader>
@@ -394,16 +394,16 @@ export default function ComponentShowcase() {
 
         {/* Dialogs & Modals */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <AlertCircle className="w-6 h-6" />
             Dialogs & Modals
           </h2>
           <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
             <CardHeader>
-              <CardTitle className="text-adam-neutral-50">
+              <CardTitle className="text-white">
                 {t('deleteAccount.confirmTitle')}
               </CardTitle>
-              <CardDescription className="text-adam-neutral-400">
+              <CardDescription className="text-gray-400">
                 Click to preview dialog
               </CardDescription>
             </CardHeader>
@@ -417,18 +417,18 @@ export default function ComponentShowcase() {
           <Dialog open={showDialog} onOpenChange={setShowDialog}>
             <DialogContent className="bg-adam-bg-secondary-dark border-adam-neutral-700">
               <DialogHeader>
-                <DialogTitle className="text-adam-neutral-50">
+                <DialogTitle className="text-white">
                   {t('deleteAccount.sad')}
                 </DialogTitle>
-                <DialogDescription className="text-adam-neutral-400">
+                <DialogDescription className="text-gray-400">
                   {t('deleteAccount.confirmDescription')}
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-2 py-4">
-                <p className="text-sm text-adam-neutral-300">
+                <p className="text-sm text-gray-300">
                   • {t('deleteAccount.permanentWarning')}
                 </p>
-                <p className="text-sm text-adam-neutral-300">
+                <p className="text-sm text-gray-300">
                   • {t('deleteAccount.dataRetentionWarning')}
                 </p>
               </div>
@@ -446,7 +446,7 @@ export default function ComponentShowcase() {
 
         {/* Subscription Cards */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Download className="w-6 h-6" />
             Subscription Plans
           </h2>
@@ -454,18 +454,18 @@ export default function ComponentShowcase() {
             {/* Free Plan */}
             <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
               <CardHeader>
-                <CardTitle className="text-adam-neutral-50">
+                <CardTitle className="text-white">
                   {t('subscriptions.planFree')}
                 </CardTitle>
-                <CardDescription className="text-adam-neutral-400">
+                <CardDescription className="text-gray-400">
                   {t('subscriptions.planFreeDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-3xl font-bold text-adam-neutral-50">
+                <div className="text-3xl font-bold text-white">
                   {t('subscriptions.priceFree')}
                 </div>
-                <ul className="space-y-2 text-sm text-adam-neutral-300">
+                <ul className="space-y-2 text-sm text-gray-300">
                   <li className="flex items-center">
                     <Check className="w-4 h-4 mr-2 text-green-500" />
                     {t('subscriptions.feature1')}
@@ -491,18 +491,18 @@ export default function ComponentShowcase() {
                 <Badge>{t('subscriptions.mostPopular')}</Badge>
               </div>
               <CardHeader>
-                <CardTitle className="text-adam-neutral-50">
+                <CardTitle className="text-white">
                   {t('subscriptions.planStandard')}
                 </CardTitle>
-                <CardDescription className="text-adam-neutral-400">
+                <CardDescription className="text-gray-400">
                   {t('subscriptions.planStandardDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-3xl font-bold text-adam-neutral-50">
+                <div className="text-3xl font-bold text-white">
                   {t('subscriptions.priceStandard')}
                 </div>
-                <ul className="space-y-2 text-sm text-adam-neutral-300">
+                <ul className="space-y-2 text-sm text-gray-300">
                   <li className="flex items-center">
                     <Check className="w-4 h-4 mr-2 text-green-500" />
                     {t('subscriptions.featureStandard1')}
@@ -521,18 +521,18 @@ export default function ComponentShowcase() {
             {/* Pro Plan */}
             <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
               <CardHeader>
-                <CardTitle className="text-adam-neutral-50">
+                <CardTitle className="text-white">
                   {t('subscriptions.planPro')}
                 </CardTitle>
-                <CardDescription className="text-adam-neutral-400">
+                <CardDescription className="text-gray-400">
                   {t('subscriptions.planProDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-3xl font-bold text-adam-neutral-50">
+                <div className="text-3xl font-bold text-white">
                   {t('subscriptions.pricePro')}
                 </div>
-                <ul className="space-y-2 text-sm text-adam-neutral-300">
+                <ul className="space-y-2 text-sm text-gray-300">
                   <li className="flex items-center">
                     <Check className="w-4 h-4 mr-2 text-green-500" />
                     {t('subscriptions.featurePro1')}
@@ -556,26 +556,26 @@ export default function ComponentShowcase() {
 
         {/* Editor Components */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Edit className="w-6 h-6" />
             Editor Interface
           </h2>
           <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
             <CardHeader>
-              <CardTitle className="text-adam-neutral-50">
+              <CardTitle className="text-white">
                 {t('editor.quadTopology')}
               </CardTitle>
-              <CardDescription className="text-adam-neutral-400">
+              <CardDescription className="text-gray-400">
                 Topology controls
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-adam-neutral-300">
+                  <Label className="text-gray-300">
                     {t('editor.quadTopology')}
                   </Label>
-                  <p className="text-sm text-adam-neutral-400">
+                  <p className="text-sm text-gray-400">
                     {t('editor.quadTopologyEnabled')}
                   </p>
                 </div>
@@ -601,16 +601,16 @@ export default function ComponentShowcase() {
 
         {/* Data Table */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Table className="w-6 h-6" />
             Data Display
           </h2>
           <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
             <CardHeader>
-              <CardTitle className="text-adam-neutral-50">
+              <CardTitle className="text-white">
                 {t('history.title')}
               </CardTitle>
-              <CardDescription className="text-adam-neutral-400">
+              <CardDescription className="text-gray-400">
                 Recent conversations
               </CardDescription>
             </CardHeader>
@@ -618,19 +618,19 @@ export default function ComponentShowcase() {
               <Table>
                 <TableHeader>
                   <TableRow className="border-adam-neutral-700">
-                    <TableHead className="text-adam-neutral-300">Name</TableHead>
-                    <TableHead className="text-adam-neutral-300">Status</TableHead>
-                    <TableHead className="text-adam-neutral-300">Date</TableHead>
-                    <TableHead className="text-adam-neutral-300">Actions</TableHead>
+                    <TableHead className="text-gray-300">Name</TableHead>
+                    <TableHead className="text-gray-300">Status</TableHead>
+                    <TableHead className="text-gray-300">Date</TableHead>
+                    <TableHead className="text-gray-300">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="border-adam-neutral-700">
-                    <TableCell className="text-adam-neutral-300">Parametric Gear</TableCell>
+                    <TableCell className="text-gray-300">Parametric Gear</TableCell>
                     <TableCell>
                       <Badge variant="default">Active</Badge>
                     </TableCell>
-                    <TableCell className="text-adam-neutral-400">2026-04-02</TableCell>
+                    <TableCell className="text-gray-400">2026-04-02</TableCell>
                     <TableCell>
                       <Button variant="ghost" size="sm">
                         <Edit className="w-4 h-4" />
@@ -638,11 +638,11 @@ export default function ComponentShowcase() {
                     </TableCell>
                   </TableRow>
                   <TableRow className="border-adam-neutral-700">
-                    <TableCell className="text-adam-neutral-300">Phone Stand</TableCell>
+                    <TableCell className="text-gray-300">Phone Stand</TableCell>
                     <TableCell>
                       <Badge variant="secondary">Completed</Badge>
                     </TableCell>
-                    <TableCell className="text-adam-neutral-400">2026-04-01</TableCell>
+                    <TableCell className="text-gray-400">2026-04-01</TableCell>
                     <TableCell>
                       <Button variant="ghost" size="sm">
                         <Edit className="w-4 h-4" />
@@ -650,11 +650,11 @@ export default function ComponentShowcase() {
                     </TableCell>
                   </TableRow>
                   <TableRow className="border-adam-neutral-700">
-                    <TableCell className="text-adam-neutral-300">Custom Bracket</TableCell>
+                    <TableCell className="text-gray-300">Custom Bracket</TableCell>
                     <TableCell>
                       <Badge variant="outline">Draft</Badge>
                     </TableCell>
-                    <TableCell className="text-adam-neutral-400">2026-03-31</TableCell>
+                    <TableCell className="text-gray-400">2026-03-31</TableCell>
                     <TableCell>
                       <Button variant="ghost" size="sm">
                         <Edit className="w-4 h-4" />
@@ -669,13 +669,13 @@ export default function ComponentShowcase() {
 
         {/* Tabs Example */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-adam-neutral-50 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
             <Menu className="w-6 h-6" />
             Tabbed Interface
           </h2>
           <Card className="bg-adam-bg-secondary-dark border-adam-neutral-700">
             <CardHeader>
-              <CardTitle className="text-adam-neutral-50">
+              <CardTitle className="text-white">
                 {t('history.listView')} / {t('history.visualView')}
               </CardTitle>
             </CardHeader>
@@ -688,25 +688,25 @@ export default function ComponentShowcase() {
                 <TabsContent value="list" className="mt-4">
                   <div className="space-y-2">
                     <div className="p-4 bg-adam-bg-dark rounded-lg">
-                      <h3 className="text-adam-neutral-300">Conversation 1</h3>
-                      <p className="text-sm text-adam-neutral-400">Last edited 2 hours ago</p>
+                      <h3 className="text-gray-300">Conversation 1</h3>
+                      <p className="text-sm text-gray-400">Last edited 2 hours ago</p>
                     </div>
                     <div className="p-4 bg-adam-bg-dark rounded-lg">
-                      <h3 className="text-adam-neutral-300">Conversation 2</h3>
-                      <p className="text-sm text-adam-neutral-400">Last edited yesterday</p>
+                      <h3 className="text-gray-300">Conversation 2</h3>
+                      <p className="text-sm text-gray-400">Last edited yesterday</p>
                     </div>
                   </div>
                 </TabsContent>
                 <TabsContent value="visual" className="mt-4">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="aspect-square bg-adam-neutral-800 rounded-lg flex items-center justify-center">
-                      <span className="text-adam-neutral-500">Preview 1</span>
+                      <span className="text-white0">Preview 1</span>
                     </div>
                     <div className="aspect-square bg-adam-neutral-800 rounded-lg flex items-center justify-center">
-                      <span className="text-adam-neutral-500">Preview 2</span>
+                      <span className="text-white0">Preview 2</span>
                     </div>
                     <div className="aspect-square bg-adam-neutral-800 rounded-lg flex items-center justify-center">
-                      <span className="text-adam-neutral-500">Preview 3</span>
+                      <span className="text-white0">Preview 3</span>
                     </div>
                   </div>
                 </TabsContent>
@@ -717,10 +717,10 @@ export default function ComponentShowcase() {
 
         {/* Footer */}
         <div className="border-t border-adam-neutral-700 pt-6 text-center">
-          <p className="text-adam-neutral-400">
+          <p className="text-gray-400">
             🤖 Implemented by <strong>Lingma</strong> - AI coding assistant
           </p>
-          <p className="text-sm text-adam-neutral-500 mt-2">
+          <p className="text-sm text-white0 mt-2">
             For CADAM - Open Source Text to CAD Web App
           </p>
         </div>

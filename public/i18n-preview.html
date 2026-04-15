@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CADAM i18n Component Preview - by Lingma</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+    
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .lang-btn {
+      padding: 15px 40px;
+      font-size: 1.1em;
+      border: 3px solid white;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .lang-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+    
+    .lang-btn.active {
+      background: white;
+      color: #667eea;
+      font-weight: bold;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .card h2 .icon {
+      font-size: 1.2em;
+    }
+    
+    .component-row {
+      display: flex;
+      gap: 15px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #5568d3;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+    
+    .btn-secondary:hover {
+      background: #d0d0d0;
+    }
+    
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+    
+    .input-group {
+      margin: 15px 0;
+    }
+    
+    .input-group label {
+      display: block;
+      color: #555;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.2s ease;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+      margin: 5px;
+    }
+    
+    .badge-default {
+      background: #667eea;
+      color: white;
+    }
+    
+    .badge-success {
+      background: #10b981;
+      color: white;
+    }
+    
+    .badge-warning {
+      background: #f59e0b;
+      color: white;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    
+    .pricing-card {
+      border: 3px solid #e0e0e0;
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .pricing-card.featured {
+      border-color: #667eea;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    }
+    
+    .pricing-card h3 {
+      color: #333;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+    
+    .price {
+      font-size: 2.5em;
+      color: #667eea;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    
+    .features {
+      list-style: none;
+      text-align: left;
+      margin: 20px 0;
+    }
+    
+    .features li {
+      padding: 8px 0;
+      color: #555;
+    }
+    
+    .features li:before {
+      content: "✓ ";
+      color: #10b981;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    
+    .footer {
+      text-align: center;
+      color: white;
+      margin-top: 60px;
+      padding: 30px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .footer strong {
+      font-weight: bold;
+      color: #ffd700;
+    }
+    
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎨 CADAM Component Showcase</h1>
+      <p>Interactive Multi-Language UI Preview</p>
+      <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLanguage('en')">
+          🇺🇸 English
+        </button>
+        <button class="lang-btn" onclick="setLanguage('zh')">
+          🇨🇳 简体中文
+        </button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Buttons -->
+      <div class="card">
+        <h2><span class="icon">🔘</span> <span data-i18n="buttons">Buttons</span></h2>
+        <div class="component-row">
+          <button class="btn btn-primary" data-i18n="continue">Continue</button>
+          <button class="btn btn-secondary" data-i18n="cancel">Cancel</button>
+          <button class="btn btn-danger" data-i18n="delete">Delete</button>
+        </div>
+        <div class="component-row">
+          <button class="btn btn-primary" data-i18n="signIn">Sign In</button>
+          <button class="btn btn-primary" data-i18n="signUp">Sign Up</button>
+          <button class="btn btn-primary" data-i18n="newCreation">+ New Creation</button>
+        </div>
+      </div>
+
+      <!-- Forms -->
+      <div class="card">
+        <h2><span class="icon">📝</span> <span data-i18n="forms">Forms</span></h2>
+        <div class="input-group">
+          <label data-i18n="email">Email</label>
+          <input type="email" data-i18n-placeholder="enterEmail" placeholder="Enter your email">
+        </div>
+        <div class="input-group">
+          <label data-i18n="password">Password</label>
+          <input type="password" data-i18n-placeholder="enterPassword" placeholder="Enter your password">
+        </div>
+        <div class="input-group">
+          <label data-i18n="fullName">Full Name</label>
+          <input type="text" data-i18n-placeholder="enterFullName" placeholder="Enter your full name">
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="card">
+        <h2><span class="icon">🧭</span> <span data-i18n="navigation">Navigation</span></h2>
+        <div class="component-row">
+          <button class="btn btn-secondary" data-i18n="home">Home</button>
+          <button class="btn btn-secondary" data-i18n="settings">Settings</button>
+          <button class="btn btn-secondary" data-i18n="subscriptions">Subscriptions</button>
+        </div>
+        <div class="component-row">
+          <button class="btn btn-secondary" data-i18n="share">Share</button>
+          <button class="btn btn-secondary" data-i18n="download">Download</button>
+          <button class="btn btn-secondary" data-i18n="edit">Edit</button>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="card">
+        <h2><span class="icon">📊</span> <span data-i18n="status">Status & Progress</span></h2>
+        <div style="margin: 20px 0;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span data-i18n="subscriptionTokens">Subscription tokens</span>
+            <span>750 / 1000</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%;"></div>
+          </div>
+        </div>
+        <div style="margin: 20px 0;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span data-i18n="generating">Generating...</span>
+            <span>45%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 45%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="card">
+        <h2><span class="icon">🏷️</span> <span data-i18n="badges">Badges</span></h2>
+        <div>
+          <span class="badge badge-default" data-i18n="planStandard">Standard</span>
+          <span class="badge badge-success" data-i18n="success">Success</span>
+          <span class="badge badge-warning" data-i18n="warning">Warning</span>
+        </div>
+        <div style="margin-top: 15px;">
+          <span class="badge badge-default" data-i18n="planFree">Free</span>
+          <span class="badge" style="background: #ef4444; color: white;" data-i18n="planPro">Pro</span>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="card">
+        <h2><span class="icon">💎</span> <span data-i18n="pricing">Pricing Plans</span></h2>
+        <div class="pricing-card">
+          <h3 data-i18n="planStandard">Standard</h3>
+          <div class="price" data-i18n="priceStandard">$9.99/mo</div>
+          <ul class="features">
+            <li data-i18n="feature1">1,000 tokens per month</li>
+            <li data-i18n="feature2">All AI features</li>
+            <li data-i18n="feature3">Community support</li>
+          </ul>
+          <button class="btn btn-primary" style="width: 100%;" data-i18n="getStarted">Get Started</button>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="card">
+        <h2><span class="icon">⚙️</span> <span data-i18n="settingsTitle">Settings</span></h2>
+        <div class="input-group">
+          <label data-i18n="account">Account</label>
+          <p style="color: #666; font-size: 0.9em;" data-i18n="accountDesc">Manage your account settings</p>
+        </div>
+        <div class="input-group">
+          <label data-i18n="notifications">Notifications</label>
+          <p style="color: #666; font-size: 0.9em;" data-i18n="notificationsDesc">Get notified when Adam finishes</p>
+        </div>
+        <div class="input-group">
+          <label data-i18n="billing">Billing</label>
+          <p style="color: #666; font-size: 0.9em;" data-i18n="billingDesc">Manage subscription and payments</p>
+        </div>
+      </div>
+
+      <!-- Editor -->
+      <div class="card">
+        <h2><span class="icon">🎨</span> <span data-i18n="editor">Editor</span></h2>
+        <div class="component-row">
+          <button class="btn btn-secondary" data-i18n="retry">Retry</button>
+          <button class="btn btn-secondary" data-i18n="regenerate">Regenerate</button>
+          <button class="btn btn-secondary" data-i18n="upscale">Upscale</button>
+        </div>
+        <div class="component-row">
+          <button class="btn btn-secondary" data-i18n="wireframe">Wireframe</button>
+          <button class="btn btn-secondary" data-i18n="solid">Solid</button>
+          <button class="btn btn-secondary" data-i18n="reset">Reset</button>
+        </div>
+        <div style="margin-top: 15px;">
+          <p style="color: #666;" data-i18n="quadTopology">Quad topology enabled</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>🤖 Implemented by <strong>Lingma</strong> - AI coding assistant</p>
+      <p style="margin-top: 10px; opacity: 0.8;">For CADAM - Open Source Text to CAD Web App</p>
+      <p style="margin-top: 5px; font-size: 0.9em; opacity: 0.7;">April 2, 2026</p>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        buttons: 'Buttons',
+        continue: 'Continue',
+        cancel: 'Cancel',
+        delete: 'Delete',
+        signIn: 'Sign In',
+        signUp: 'Sign Up',
+        newCreation: '+ New Creation',
+        forms: 'Forms',
+        email: 'Email',
+        enterEmail: 'Enter your email',
+        password: 'Password',
+        enterPassword: 'Enter your password',
+        fullName: 'Full Name',
+        enterFullName: 'Enter your full name',
+        navigation: 'Navigation',
+        home: 'Home',
+        settings: 'Settings',
+        subscriptions: 'Subscriptions',
+        share: 'Share',
+        download: 'Download',
+        edit: 'Edit',
+        status: 'Status & Progress',
+        subscriptionTokens: 'Subscription tokens',
+        generating: 'Generating...',
+        badges: 'Badges',
+        planStandard: 'Standard',
+        success: 'Success',
+        warning: 'Warning',
+        planFree: 'Free',
+        planPro: 'Pro',
+        pricing: 'Pricing Plans',
+        priceStandard: '$9.99/mo',
+        feature1: '1,000 tokens per month',
+        feature2: 'All AI features',
+        feature3: 'Community support',
+        getStarted: 'Get Started',
+        settingsTitle: 'Settings',
+        account: 'Account',
+        accountDesc: 'Manage your account settings',
+        notifications: 'Notifications',
+        notificationsDesc: 'Get notified when Adam finishes',
+        billing: 'Billing',
+        billingDesc: 'Manage subscription and payments',
+        editor: 'Editor',
+        retry: 'Retry',
+        regenerate: 'Regenerate',
+        upscale: 'Upscale',
+        wireframe: 'Wireframe',
+        solid: 'Solid',
+        reset: 'Reset',
+        quadTopology: 'Quad topology enabled'
+      },
+      zh: {
+        buttons: '按钮',
+        continue: '继续',
+        cancel: '取消',
+        delete: '删除',
+        signIn: '登录',
+        signUp: '注册',
+        newCreation: '+ 新建设计',
+        forms: '表单',
+        email: '邮箱',
+        enterEmail: '请输入邮箱',
+        password: '密码',
+        enterPassword: '请输入密码',
+        fullName: '全名',
+        enterFullName: '请输入全名',
+        navigation: '导航',
+        home: '主页',
+        settings: '设置',
+        subscriptions: '订阅方案',
+        share: '分享',
+        download: '下载',
+        edit: '编辑',
+        status: '状态与进度',
+        subscriptionTokens: '订阅点数',
+        generating: '生成中...',
+        badges: '徽章',
+        planStandard: '标准版',
+        success: '成功',
+        warning: '警告',
+        planFree: '免费版',
+        planPro: '专业版',
+        pricing: '定价方案',
+        priceStandard: '$9.99/月',
+        feature1: '每月 1,000 个点数',
+        feature2: '所有 AI 功能',
+        feature3: '社区支持',
+        getStarted: '开始使用',
+        settingsTitle: '设置',
+        account: '账户',
+        accountDesc: '管理您的账户设置',
+        notifications: '通知',
+        notificationsDesc: '当 Adam 完成时收到通知',
+        billing: '账单',
+        billingDesc: '管理订阅和支付',
+        editor: '编辑器',
+        retry: '重试',
+        regenerate: '重新生成',
+        upscale: '提升质量',
+        wireframe: '线框',
+        solid: '实体',
+        reset: '重置',
+        quadTopology: '已启用四元拓扑'
+      }
+    };
+
+    function setLanguage(lang) {
+      // Update buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // Update all translatable elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) {
+          el.placeholder = translations[lang][key];
+        }
+      });
+
+      // Save preference
+      localStorage.setItem('preview-lang', lang);
+    }
+
+    // Load saved preference
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preview-lang') || 'en';
+      const btn = document.querySelector(`.lang-btn[onclick="setLanguage('${savedLang}')"]`);
+      if (btn) {
+        btn.click();
+      }
+    });
+  </script>
+</body>
+</html>

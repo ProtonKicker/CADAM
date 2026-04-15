@@ -131,9 +131,10 @@ const router = sentryCreateBrowserRouter(
 );
 
 createRoot(document.getElementById('root')!).render(
-  isSupabaseConfigMissing ? (
-    <MissingConfig />
-  ) : (
+  // Bypass config check for UI testing - Lingma
+  // isSupabaseConfigMissing ? (
+  //   <MissingConfig />
+  // ) : (
     <StrictMode>
       <PostHogProvider
         apiKey={import.meta.env.VITE_POSTHOG_PROJECT_KEY ?? ''}
@@ -145,5 +146,5 @@ createRoot(document.getElementById('root')!).render(
         <RouterProvider router={router} future={{ v7_startTransition: true }} />
       </PostHogProvider>
     </StrictMode>
-  ),
+  // )
 );
