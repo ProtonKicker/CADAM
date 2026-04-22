@@ -1203,8 +1203,12 @@ Deno.serve(async (req) => {
                   artifact,
                 };
               }
-              streamMessage(controller, { ...newMessageData, content });
+              // Mark resolved *before* the side-effectful streamMessage:
+              // `content` already reflects the terminal state (artifact set
+              // or tool call removed), so if streamMessage ever threw, the
+              // finally below must not clobber that with an `error` flip.
               resolved = true;
+              streamMessage(controller, { ...newMessageData, content });
             } finally {
               // Safety net: any escape from the block above (thrown error,
               // forgotten return, upstream abort) that left this tool call
