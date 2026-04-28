@@ -253,15 +253,12 @@ async function generateMeshImage(
     }
   }
 
-  // One line per mesh generation — low noise, high signal. Grep for
-  // "provider=flux" or "quality=low" etc. in Supabase function logs to
-  // audit fallback + cost-tier distribution.
-  //
-  // `quality` is only logged when gpt-image-2 actually ran — it's a
-  // gpt-image-2 tool parameter, not a concept that applies to the
-  // Gemini/Flux fallbacks, so including it on fallback rows would be
-  // misleading.
-  console.log(
+  // Diagnostic log — gated on DEBUG_LOGS. In prod, ground truth comes from:
+  //   - images.image_generation_call_id (null = fallback ran, non-null = gpt-image-2)
+  //   - Sentry events tagged stage=gpt_image_2_fallback / nano_banana_pro_fallback
+  //     / flux_fallback with full meshModel + subStage context
+  // This line stays opt-in for live debugging without polluting prod logs.
+  debugLog(
     `[mesh] image_gen provider=${provider} meshModel=${sentryStage.meshModel}` +
       (sentryStage.subStage ? ` subStage=${sentryStage.subStage}` : '') +
       (provider === 'gpt-image-2'
@@ -553,12 +550,26 @@ Deno.serve(async (req) => {
         );
       }
 
-      // Upload to FAL storage
-      const imageFile = new File([imageBlob], 'seed-image.png', {
-        type: 'image/png',
+      // Upload to FAL storage. Preserve the blob's actual MIME — seed
+      // images from gpt-image-2 are jpeg, seeds from Gemini/Flux are png.
+      // FAL serves the uploaded bytes with the Content-Type we give it,
+      // and Hunyuan3D's image decoder relies on extension + MIME matching
+      // the actual bytes; hardcoding png would fail on jpeg seeds.
+      const seedMime =
+        imageBlob.type && imageBlob.type.startsWith('image/')
+          ? imageBlob.type
+          : 'image/png';
+      const seedExt =
+        seedMime === 'image/jpeg'
+          ? 'jpg'
+          : seedMime === 'image/webp'
+            ? 'webp'
+            : 'png';
+      const imageFile = new File([imageBlob], `seed-image.${seedExt}`, {
+        type: seedMime,
       });
       const imageUrl = await fal.storage.upload(imageFile);
-      debugLog('Uploaded seed image to FAL:', imageUrl);
+      debugLog('Uploaded seed image to FAL:', imageUrl, { seedMime });
 
       // Create new mesh entry for upscaled result
       const { data: newMeshData, error: newMeshError } = await supabaseClient
