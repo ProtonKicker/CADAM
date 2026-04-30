@@ -264,12 +264,13 @@ export const PARAMETRIC_MODELS: ModelConfig[] = [
     supportsVision: true,
   },
   {
-    id: 'deepseek/deepseek-v4-pro',
-    name: 'DeepSeek V4 Pro',
-    description: 'Long-context MoE model for complex reasoning and code',
-    provider: 'DeepSeek',
+    id: 'openrouter/owl-alpha',
+    name: 'Owl Alpha',
+    description:
+      'High-performance agentic model with native tool use and long-context support',
+    provider: 'OpenRouter',
     supportsTools: true,
-    supportsThinking: true,
+    supportsThinking: false,
     supportsVision: false,
   },
 ];
