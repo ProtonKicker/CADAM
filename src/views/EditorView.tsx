@@ -1,90 +1,51 @@
-import { supabase } from '@/lib/supabase';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
 import { Loader2 } from 'lucide-react';
 import { CreativeEditorView } from './CreativeEditorView';
 import { ParametricEditorView } from './ParametricEditorView';
 import { ConversationContext } from '@/contexts/ConversationContext';
 import { Conversation, Message } from '@shared/types';
-import { MessageItem } from '../types/misc.ts';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CurrentMessageContext } from '@/contexts/CurrentMessageContext';
-import { SelectedItemsContext } from '@/contexts/SelectedItemsContext';
 
 export default function EditorView() {
   const { id: conversationId } = useParams();
-  const { user } = useAuth();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [currentMessage, setCurrentMessage] = useState<Message | null>(null);
-  const [images, setImages] = useState<MessageItem[]>([]);
-  const [mesh, setMesh] = useState<MessageItem | null>(null);
-  const navigate = useNavigate();
 
-  const { data: conversation, isLoading: isConversationLoading } = useQuery({
-    queryKey: ['conversation', conversationId],
-    enabled: !!conversationId,
-    queryFn: async () => {
-      if (!conversationId) {
-        throw new Error('Conversation ID is required');
-      }
-      const { data, error } = await supabase
-        .from('conversations')
-        .select('*')
-        .eq('id', conversationId)
-        .eq('user_id', user?.id ?? '')
-        .limit(1)
-        .single();
+  // Create a minimal conversation from the URL ID
+  const conversation = useMemo((): Conversation => {
+    // Try to find an existing conversation in the cache
+    const cached = queryClient.getQueryData<Conversation>([
+      'conversation',
+      conversationId,
+    ]);
+    if (cached) return cached;
 
-      if (error) {
-        throw error;
-      }
-
-      return data as Conversation;
-    },
-  });
+    // Otherwise create a minimal one
+    return {
+      id: conversationId || '',
+      title: 'New Conversation',
+      type: 'parametric',
+      privacy: 'private',
+      current_message_leaf_id: null,
+      user_id: 'local-user',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      settings: { model: 'qwen2.5-coder:7b' },
+    };
+  }, [conversationId, queryClient]);
 
   const { mutate: updateConversation, mutateAsync: updateConversationAsync } =
     useMutation({
-      mutationFn: async (conversation: Conversation) => {
-        const { data, error } = await supabase
-          .from('conversations')
-          .update(conversation)
-          .eq('id', conversation.id)
-          .select()
-          .single()
-          .overrideTypes<Conversation>();
-
-        if (error) {
-          throw error;
-        }
-
-        return data;
+      mutationFn: async (conv: Conversation) => {
+        // Just update the React Query cache — no server call
+        queryClient.setQueryData(['conversation', conv.id], conv);
+        return conv;
       },
-      onMutate(conversation) {
-        const oldConversation = queryClient.getQueryData<Conversation>([
-          'conversation',
-          conversation.id,
-        ]);
-        queryClient.setQueryData(
-          ['conversation', conversation.id],
-          conversation,
-        );
-        return { oldConversation };
-      },
-      onSuccess() {
-        queryClient.invalidateQueries({
-          queryKey: ['conversation', conversationId],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['conversations'],
-        });
-      },
-      onError(_error, conversation, context) {
-        queryClient.setQueryData(
-          ['conversation', conversation.id],
-          context?.oldConversation,
-        );
+      onSuccess(conv) {
+        queryClient.setQueryData(['conversation', conv.id], conv);
       },
     });
 
@@ -94,7 +55,7 @@ export default function EditorView() {
     }
   }, [conversationId, navigate]);
 
-  if (isConversationLoading) {
+  if (!conversationId) {
     return (
       <div className="flex h-full w-full items-center justify-center bg-adam-bg-secondary-dark text-adam-text-primary">
         <Loader2 className="h-10 w-10 animate-spin" />
@@ -102,38 +63,18 @@ export default function EditorView() {
     );
   }
 
-  if (!conversation) {
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center bg-adam-bg-secondary-dark text-adam-text-primary">
-        <span className="text-2xl font-medium">404</span>
-        <span className="text-sm">Conversation not found</span>
-      </div>
-    );
-  }
-
   return (
     <CurrentMessageContext.Provider
-      value={{
-        currentMessage,
-        setCurrentMessage,
-      }}
+      value={{ currentMessage, setCurrentMessage }}
     >
       <ConversationContext.Provider
-        value={{
-          conversation,
-          updateConversation,
-          updateConversationAsync,
-        }}
+        value={{ conversation, updateConversation, updateConversationAsync }}
       >
-        <SelectedItemsContext.Provider
-          value={{ images, setImages, mesh, setMesh }}
-        >
-          {conversation.type === 'creative' ? (
-            <CreativeEditorView />
-          ) : (
-            <ParametricEditorView />
-          )}
-        </SelectedItemsContext.Provider>
+        {conversation.type === 'creative' ? (
+          <CreativeEditorView />
+        ) : (
+          <ParametricEditorView />
+        )}
       </ConversationContext.Provider>
     </CurrentMessageContext.Provider>
   );
