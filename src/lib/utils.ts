@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { Message, Model, Parameter } from '@shared/types';
-import { ModelConfig } from '../types/misc.ts';
+import { ModelConfig } from '../types/misc';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

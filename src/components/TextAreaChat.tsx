@@ -35,7 +35,7 @@ import {
 const shouldShowQuadsControls = (model: Model): boolean => {
   return shouldShowPolygonControls(model as CreativeModel);
 };
-import { MessageItem } from '../types/misc.ts';
+import { MessageItem } from '../types/misc';
 import { useToast } from '@/hooks/use-toast';
 import {
   Tooltip,
