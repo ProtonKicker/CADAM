@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useContext,
 } from 'react';
 import {
   ArrowUp,
@@ -63,7 +64,7 @@ import {
   renderMultipleAngles,
   BoundingBox,
 } from '@/utils/meshUtils';
-import { useMeshFiles } from '@/contexts/MeshFilesContext';
+import { MeshFilesContext } from '@/contexts/MeshFilesContext';
 import { AnimatePresence, motion } from 'framer-motion';
 
 interface TextAreaChatProps {
@@ -494,7 +495,7 @@ function TextAreaChat({
   const { toast } = useToast();
   const { session } = useAuth();
   const { images, mesh, setImages, setMesh } = useItemSelection();
-  const meshFiles = useMeshFiles();
+  const meshFiles = useContext(MeshFilesContext);
 
   // Parametric mode: bounding box and filename from STL parsing
   const [meshBoundingBox, setMeshBoundingBox] = useState<BoundingBox | null>(
@@ -975,7 +976,9 @@ function TextAreaChat({
           setMeshFilename(file.name);
 
           // Store STL blob in context for WASM filesystem access
-          meshFiles.setMeshFile(file.name, file);
+          if (meshFiles) {
+            meshFiles.setMeshFile(file.name, file);
+          }
 
           // Generate multi-angle renders and upload as images
           const renders = await renderMultipleAngles(geometry, boundingBox);
